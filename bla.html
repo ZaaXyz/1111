@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥷</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffedff;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Biar gambar nggak bikin scrollbar */
+            text-align: center;
+        }
+
+        .photo-frame {
+            width: 180px;
+            height: 180px;
+            margin: 20px auto;
+            border: 5px solid #ff69b4;
+            border-radius: 50%; /* Biar bulat, hapus ini kalau mau kotak */
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Biar foto gak gepeng */
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(255, 105, 180, 0.3);
+            border: 8px solid #ff69b4;
+            z-index: 100; /* Biar di atas hujan gambar */
+            position: relative;
+            animation: bounceIn 1s ease-out;
+        }
+
+        h1 { color: #ff1493; font-size: 2.5rem; }
+        
+        /* Gaya buat gambar yang ujan */
+        .falling-image {
+            position: absolute;
+            top: -150px; /* Biar munculnya dari agak atas luar layar */
+            z-index: 1;
+            /* Filter biar gambar aibnya lebih jelas/kontras */
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); 
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                /* Kita tambah rotasi biar kayak daun jatuh tapi lebih pelan */
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <span style="font-size: 3rem;">🎂🎉✨</span>
+        
+        <!-- Wadah Foto dengan Bingkai -->
+        <div class="photo-frame">
+            <img src="opening.jpeg" alt="Si Paling Lulus">
+        </div>
+
+        <h1>hepa hepi graduation</h1>
+        <p>AHIRNYAA LULUS GAISS !!! 
+            jujurrr waktu ga kerasa banget, hyft kaya masih ga nyangka aja kita udah lulus kaya INI BENER GA SEKOLAH LAGI 😭😭
+        </p>
+        <p>, dem.... udah gapiket lagi , no more mbg, galagi roling tempat duduk, galagi gabut pulsek.....</p>
+        <br>
+        <p>mungkin udah segitu aja, maap bikin buka web nya lama biar misterius 11.11 😈😈 </p>
+        <p style="font-size: 0.9rem; color: #888;">(jujur sebenarnya pengen ngasih sesuatu, tp gatau apa, sma takut dikira apa 😅😊)</p>
+    </div>
+
+    <script>
+        // Daftar URL gambar lucu lu di sini
+        const memeImages = [
+            '1.png', // Ganti pake file lokal lu, misal 'muka1.png'
+            '2.png',
+            '3.png',
+            '4.png',
+            '5.png',
+            '6.png',
+            '7.png'         
+        ];
+
+        function createRain() {
+            const img = document.createElement('img');
+            const randomImg = memeImages[Math.floor(Math.random() * memeImages.length)];
+            
+            img.src = randomImg;
+            img.classList.add('falling-image');
+            img.style.left = Math.random() * 90 + 'vw'; // Biar gak terlalu mepet pinggir kanan
+
+            // --- BAGIAN INI YANG BIKIN LEBIH KELIHATAN ---
+            
+            // 1. Ukuran lebih gede (misal antara 120px sampai 200px)
+            const size = Math.random() * 80 + 120; 
+            img.style.width = size + 'px';
+
+            // 2. Durasi jatuh lebih lambat (misal antara 5 sampai 8 detik)
+            // Makin besar angkanya, makin pelan jatuhnya
+            const duration = Math.random() * 3 + 5; 
+            img.style.animationDuration = duration + 's';
+
+            // 3. Tambahin sedikit transparansi biar estetik tapi tetep jelas
+            img.style.opacity = Math.random() * 0.3 + 0.7; // Opacity antara 0.7 - 1.0
+
+            document.body.appendChild(img);
+
+            setTimeout(() => {
+                img.remove();
+            }, duration * 1000);
+        }
+
+        // 4. Jeda antar gambar lebih lama (misal tiap 800ms) 
+        // Biar nggak numpuk banget kayak badai
+        setInterval(createRain, 800);
+    </script>
+</body>
+</html>
